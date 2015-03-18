@@ -20,6 +20,18 @@ public class Vehicle {
 	@GeneratedValue
 	private Long id;
 	/**
+	 * 
+	 * 车牌号,物理主键,长度20位
+	 */
+	@Column(nullable=false,unique=true,length=20)
+	private String licenseNumber;
+	/**
+	 * 
+	 * 车辆颜色
+	 */
+	@Column(nullable=true,length=20)
+	private String color;
+	/**
 	 * 与用户关联
 	 */
 	@ManyToOne(optional=false)
@@ -29,19 +41,7 @@ public class Vehicle {
 	 */
 	@ManyToOne(optional=false)
 	private VehicleModel vehicleModel;
-	
-	/**
-	 * 
-	 * 车牌号
-	 */
-	@Column(nullable=false,length=20)
-	private String licenseNumber;
-	/**
-	 * 
-	 * 车辆颜色
-	 */
-	@Column(nullable=true,length=20)
-	private String color;
+
 	
 	//TODO 添加其他属性
 	public Long getId() {
@@ -62,5 +62,31 @@ public class Vehicle {
 	public void setVehicleModel(VehicleModel vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((licenseNumber == null) ? 0 : licenseNumber.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vehicle other = (Vehicle) obj;
+		if (licenseNumber == null) {
+			if (other.licenseNumber != null)
+				return false;
+		} else if (!licenseNumber.equals(other.licenseNumber))
+			return false;
+		return true;
+	}
+	
+	
 	
 }
