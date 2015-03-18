@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * 用户常用车辆信息
@@ -12,6 +14,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "licenseNumber","customer_id" }) })
 public class Vehicle {
 	/**
 	 * 逻辑主键，自增长
@@ -19,17 +22,6 @@ public class Vehicle {
 	@Id
 	@GeneratedValue
 	private Long id;
-	/**
-	 * 与用户关联
-	 */
-	@ManyToOne(optional=false)
-	private Customer customer;
-	/**
-	 * 与车辆型号关联
-	 */
-	@ManyToOne(optional=false)
-	private VehicleModel vehicleModel;
-	
 	/**
 	 * 
 	 * 车牌号
@@ -42,6 +34,17 @@ public class Vehicle {
 	 */
 	@Column(nullable=true,length=20)
 	private String color;
+	/**
+	 * 与用户关联
+	 */
+	@ManyToOne(optional=false)
+	private Customer customer;
+	/**
+	 * 与车辆型号关联
+	 */
+	@ManyToOne(optional=false)
+	private VehicleModel vehicleModel;
+
 	
 	//TODO 添加其他属性
 	public Long getId() {
@@ -62,5 +65,31 @@ public class Vehicle {
 	public void setVehicleModel(VehicleModel vehicleModel) {
 		this.vehicleModel = vehicleModel;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((licenseNumber == null) ? 0 : licenseNumber.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vehicle other = (Vehicle) obj;
+		if (licenseNumber == null) {
+			if (other.licenseNumber != null)
+				return false;
+		} else if (!licenseNumber.equals(other.licenseNumber))
+			return false;
+		return true;
+	}
+	
+	
 	
 }
