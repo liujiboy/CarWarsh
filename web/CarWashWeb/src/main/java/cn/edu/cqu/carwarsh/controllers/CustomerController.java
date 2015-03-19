@@ -228,7 +228,7 @@ public class CustomerController {
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer= customerService.findByMobile(mobile);
-			if(customer!=null&&customer.getPwd().equals(pwd)){
+			if(customerService.isValid(mobile, pwd)){
 				customer.setPwd(newPwd);
 				customerService.edit(customer);
 				result.setMsg("密码修改成功");
