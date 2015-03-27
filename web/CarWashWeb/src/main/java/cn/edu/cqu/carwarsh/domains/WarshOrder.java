@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * 用户订单
@@ -15,6 +17,7 @@ import javax.persistence.ManyToOne;
  *
  */
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "coupon_id" }) })
 public class WarshOrder {
 	/**
 	 * 逻辑主键，自增长
@@ -27,6 +30,11 @@ public class WarshOrder {
 	 */
 	@ManyToOne(optional = false)
 	private Customer customer;
+	/**
+	 * 与优惠券关联
+	 */
+	@ManyToOne(optional = false)
+	private Coupon coupon;
 	/**
 	 * 洗 车的车辆信息
 	 */
@@ -92,7 +100,6 @@ public class WarshOrder {
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -104,7 +111,15 @@ public class WarshOrder {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
+	
+	public Coupon getCoupon() {
+		return coupon;
+	}
+	
+	public void setCoupon(Coupon coupon) {
+		this.coupon=coupon;
+	}
+	
 	public String getVehicleInfo() {
 		return vehicleInfo;
 	}
@@ -232,6 +247,5 @@ public class WarshOrder {
 			return false;
 		return true;
 	}
-	
 	
 }

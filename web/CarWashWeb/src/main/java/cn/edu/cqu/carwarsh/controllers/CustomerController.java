@@ -323,6 +323,44 @@ public class CustomerController {
 		}
 		return result;
 	}
+	
+	/**
+	 * 用户忘记密码
+	 * @param moblie 
+	 *            电话好号码	
+	 * @param code 
+	 *               验证码 
+	 * @author newPwd 
+	 *                新密码
+	 */
+	@RequestMapping(value = "/customer/forgetPwd.do")
+	public JSONResult forgetPwd(String mobile,String code,String newPwd){
+		JSONResult result = new JSONResult();
+	//	CustomerController customerController = new CustomerController();
+		
+		if (/*customerController.requestRegisterCode(mobile) != null&&
+				customerController.sendSMSCode(mobile,registerCodes.get(mobile).getValue())&&*/
+				registerCodes.get(mobile).equals(code)
+				)
+		{
+			try {
+				Customer customer= customerService.findByMobile(mobile);		
+					customer.setPwd(newPwd);
+					customerService.edit(customer);			
+					result.setMsg("密码修改成功!");
+					result.setState(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.setMsg("密码修改失败!");
+				result.setState(false);
+			}		
+		}
+		else{
+			result.setMsg("验证码错误!");
+			result.setState(false);
+		}
+		return result;
+	}
 	/**
 	 * 获取用户信息
 	 * @param mobile 手机号
