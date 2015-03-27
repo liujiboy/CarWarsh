@@ -40,6 +40,10 @@ public class BaseService {
 	{
 		 ht.update(obj);
 	}
+	protected<T> void delete(T obj)
+	{
+		 ht.delete(obj);
+	}
 	protected<T> void save(T obj)
 	{
 		ht.save(obj);
@@ -51,6 +55,12 @@ public class BaseService {
 			return list.get(0);
 		else
 			return null;
+	}
+	protected <T> List<T> getAll(Class<T> entityClass,String queryString, Object... objs)
+	{
+		List<T> list=find(entityClass,queryString,objs);
+			return list;
+
 	}
 	protected Long getCount(String queryString, Object... objs)
 	{

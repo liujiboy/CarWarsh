@@ -45,9 +45,6 @@ public class Vehicle {
 	@ManyToOne(optional=false)
 	private VehicleModel vehicleModel;
 
-	
-	//TODO 添加其他属性
-	
 	public Long getId() {
 		return id;
 	}
