@@ -31,20 +31,15 @@ public class Coupon {
 	@Column(nullable=false)
 	private String category;
 	/**
-	 * 优惠券数值
-	 */
-	@Column(nullable=false)
-	private double Value;
-	/**
 	 *优惠券截止日期
 	 *2015-12-12
 	 */
-	@Column(nullable=false,length=10)
+	@Column(nullable=false)
 	private Date endDate;
 	/**
 	 *优惠标题
 	 */
-	@Column(nullable=false)
+	@Column(nullable=false,length=500)
 	private String name;
 	
 	public Long getId() {
@@ -65,12 +60,7 @@ public class Coupon {
 	public void setCategory(String category) {
 		this.category=category;
 	}
-	public double getCouValue() {
-		return Value;
-	}
-	public void setCouMoney(double Value) {
-		this.Value=Value;
-	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}

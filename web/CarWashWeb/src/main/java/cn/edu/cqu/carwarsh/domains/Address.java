@@ -27,17 +27,17 @@ public class Address {
 	/**
 	 * 详细地址
 	 */
-	@Column(nullable=false,length=255)
+	@Column(nullable=false,length=500)
 	private String name;
 	/**
 	 * 经度
 	 */
-	@Column(nullable=false,length=30)
+	@Column(nullable=true)
 	private Double latitude;
 	/**
 	 * 纬度
 	 */
-	@Column(nullable=false,length=30)
+	@Column(nullable=true)
 	private Double longitude;
 	
 	public Long getId() {
@@ -70,16 +70,17 @@ public class Address {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result
-				+ ((latitude == null) ? 0 : latitude.hashCode());
-		result = prime * result
-				+ ((longitude == null) ? 0 : longitude.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -91,23 +92,14 @@ public class Address {
 		if (getClass() != obj.getClass())
 			return false;
 		Address other = (Address) obj;
-		if (customer == null) {
-			if (other.customer != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
-		if (latitude == null) {
-			if (other.latitude != null)
-				return false;
-		} else if (!latitude.equals(other.latitude))
-			return false;
-		if (longitude == null) {
-			if (other.longitude != null)
-				return false;
-		} else if (!longitude.equals(other.longitude))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
 	
 	
 }

@@ -41,8 +41,8 @@ public class Account {
 	 * 
 	 * 积分
 	 */
-	@Column(nullable=false,length=50)
-	private Double point;
+	@Column(nullable=false)
+	private Double point=0.0;
 	
 	
 	public String getPwd() {

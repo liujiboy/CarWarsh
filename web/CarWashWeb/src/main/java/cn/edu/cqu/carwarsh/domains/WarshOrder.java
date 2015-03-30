@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
  *
  */
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "coupon_id" }) })
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "customer_id","orderTime" }) })
 public class WarshOrder {
 	/**
 	 * 逻辑主键，自增长
@@ -32,7 +32,7 @@ public class WarshOrder {
 	/**
 	 * 与优惠券关联
 	 */
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Coupon coupon;
 	/**
 	 * 车辆品牌
@@ -65,7 +65,7 @@ public class WarshOrder {
 	@Column(nullable=false)
 	private Boolean status;
 	/**
-	 * 记录操作订单时间，如下单、出单、完成订单.
+	 * 下单时间
 	 */
 	@Column(nullable=false)
 	private Date orderTime;
@@ -82,28 +82,27 @@ public class WarshOrder {
 	/**
 	 * 洗车站点 
 	 */
-	@Column(nullable=false,unique=true)
+	@ManyToOne(optional=true)
 	private WarshStation warshStation;
 	/**
 	 * 关联洗车工 
 	 */
-	@ManyToOne
-	//@Column(nullable=true,unique=true)
+	@ManyToOne(optional=true)
 	private Worker worker;
 	/**
 	 * 详细地址
 	 */
-	@Column(nullable=false,length=255)
+	@Column(nullable=false,length=500)
 	private String addName;
 	/**
 	 * 经度
 	 */
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private Double addLatitude;
 	/**
 	 * 纬度
 	 */
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private Double addLongitude;
 	/**
 	 * 实际洗车开始时间
@@ -118,27 +117,27 @@ public class WarshOrder {
 	/**
 	 * 洗车前照片1，相对路径
 	 */
-	@Column(nullable=true,length=50)
+	@Column(nullable=true,length=100)
 	private String startPicture1;
 	/**
 	 * 洗车前照片2，相对路径
 	 */
-	@Column(nullable=true,length=50)
+	@Column(nullable=true,length=100)
 	private String startPicture2;
 	/**
 	 * 洗车后照片1，相对路径
 	 */
-	@Column(nullable=true,length=50)
+	@Column(nullable=true,length=100)
 	private String completePicture1;
 	/**
 	 * 洗车后照片2,相对路径
 	 */
-	@Column(nullable=true,length=50)
+	@Column(nullable=true,length=100)
 	private String completePicture2;
 	/**
 	 * 备注
 	 */
-	@Column(nullable=true,length=255)
+	@Column(nullable=true,length=500)
 	public String message;
 	/**
 	 * 评分
@@ -148,7 +147,7 @@ public class WarshOrder {
 	/**
 	 * 评价
 	 */
-	@Column(nullable=true,length=255)
+	@Column(nullable=true,length=500)
 	public String remark;
 	public Long getId() {
 		return id;

@@ -36,7 +36,7 @@ public class Worker {
 	/**
 	 *职工状态，表示是否离职
 	 */
-	@Column(nullable=true,length=50)
+	@Column(nullable=true)
 	private Boolean status;
 	
 	@ManyToOne(optional=false)
