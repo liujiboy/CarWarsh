@@ -38,7 +38,7 @@ public class AddressController {
 	 * @return
 	 */
 	@RequestMapping(value = "/address/add.do")
-	public JSONResult addAddress(String mobile,String pwd,String address,String remark,String longitude,String latitute)
+	public JSONResult addAddress(String mobile,String pwd,String address,Double longitude,Double latitute)
 	{
 		JSONResult result = new JSONResult();
 		try {
@@ -48,7 +48,6 @@ public class AddressController {
 					Address addr = new Address();
 					addr.setCustomer(customer);
 					addr.setDetailAddress(address);
-					addr.setRemark(remark);
 					addr.setLatitude(latitute);
 					addr.setLongitude(longitude);
 					addressService.add(addr);

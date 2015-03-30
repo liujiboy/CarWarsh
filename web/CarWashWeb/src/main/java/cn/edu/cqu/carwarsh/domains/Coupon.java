@@ -25,11 +25,6 @@ public class Coupon {
 	 */
 	@ManyToOne(optional=false)
 	private Customer customer;
-	@Column(nullable=false,unique=true,length=15)
-	/**
-	 * 优惠券的ID,系统自动生成,优惠券创建的时间
-	 */
-	private String couponID;
 	/**
 	 *优惠券类型
 	 */
@@ -39,18 +34,13 @@ public class Coupon {
 	 * 优惠券数值
 	 */
 	@Column(nullable=false)
-	private double couMoney;
+	private double Value;
 	/**
 	 *优惠券截止日期
 	 *2015-12-12
 	 */
 	@Column(nullable=false,length=10)
 	private Date endDate;
-	/**
-	 *优惠券数量
-	 */
-	@Column(nullable=false)
-	private int couAmount;
 	/**
 	 *优惠标题
 	 */
@@ -75,29 +65,17 @@ public class Coupon {
 	public void setCategory(String category) {
 		this.category=category;
 	}
-	public double getCouMoney() {
-		return couMoney;
+	public double getCouValue() {
+		return Value;
 	}
-	public void setCouMoney(double couMoney) {
-		this.couMoney=couMoney;
+	public void setCouMoney(double Value) {
+		this.Value=Value;
 	}
 	public Date getEndDate() {
 		return endDate;
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate=endDate;
-	}
-	public int getCouAmount() {
-		return couAmount;
-	}
-	public void setConAmount(int couAmount) {
-		this.couAmount=couAmount;
-	}
-	public String getCouponID() {
-		return couponID;
-	}
-	public void setCouponID(String couponID) {
-		this.couponID=couponID;
 	}
 	public String getName() {
 		return name;
@@ -109,7 +87,7 @@ public class Coupon {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((couponID == null) ? 0 : couponID.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 	@Override
@@ -121,10 +99,10 @@ public class Coupon {
 		if (getClass() != obj.getClass())
 			return false;
 		Coupon other = (Coupon) obj;
-		if (couponID == null) {
-			if (other.couponID != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!couponID.equals(other.couponID))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

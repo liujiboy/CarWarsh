@@ -37,6 +37,12 @@ public class Account {
 	 */
 	@Column(nullable=false,length=50)
 	private String pwd;
+	/**
+	 * 
+	 * 积分
+	 */
+	@Column(nullable=false,length=50)
+	private Double point;
 	
 	
 	public String getPwd() {
@@ -62,6 +68,12 @@ public class Account {
 	}
 	public void setValue(Double value) {
 		this.value = value;
+	}
+	public Double getPoint() {
+		return point;
+	}
+	public void setPoint(Double point) {
+		this.point=point;
 	}
 	@Override
 	public int hashCode() {

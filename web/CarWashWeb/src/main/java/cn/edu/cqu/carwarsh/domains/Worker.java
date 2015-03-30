@@ -33,6 +33,11 @@ public class Worker {
 	 */
 	@Column(nullable=true,length=50)
 	private String name;
+	/**
+	 *职工状态，表示是否离职
+	 */
+	@Column(nullable=true,length=50)
+	private Boolean status;
 	
 	@ManyToOne(optional=false)
 	private WarshStation warshStation;
@@ -61,6 +66,12 @@ public class Worker {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Boolean getStatus() {
+		return status;
+	}
+	public void setName(Boolean status) {
+		this.status = status;
 	}
 	public WarshStation getWarshStation() {
 		return warshStation;

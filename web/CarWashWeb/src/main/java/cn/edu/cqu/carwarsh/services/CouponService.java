@@ -33,9 +33,9 @@ public class CouponService extends BaseService{
 	 * @return 找到的Coupon
 	 * @throws Exception
 	 */
-	public Coupon findByCouponID(String couponID) throws Exception {
-		return this.getFirst(Coupon.class, "from Conpon where couponID=?",
-				couponID);
+	public Coupon findById(Long id) throws Exception {
+		return this.getFirst(Coupon.class, "from Conpon where id=?",
+				id);
 	}
 	/**
 	 * 添加Coupon
@@ -51,11 +51,11 @@ public class CouponService extends BaseService{
 	 *过期直接删除
 	 *@param coyponID 优惠券ID
 	 */
-	public Boolean isValid(String couponID)
+	public Boolean isValid(Long id)
 	{
 	
 		try {
-			 Coupon coupon=findByCouponID(couponID);
+			 Coupon coupon=findById(id);
 			 Calendar currentDate = Calendar.getInstance();
 			 Calendar EndDate = Calendar.getInstance();
 			 EndDate.setTime(coupon.getEndDate());

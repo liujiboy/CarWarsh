@@ -1,5 +1,7 @@
 package cn.edu.cqu.carwarsh.domains;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,13 +43,13 @@ public class Customer {
 	 * 生日
 	 * 1990-01-02
 	 */
-	@Column(nullable=true,length=10)
-	private String birthDay;
+	@Column(nullable=true)
+	private Date birthDay;
 	
-	public String getBirthDay() {
+	public Date getBirthDay() {
 		return birthDay;
 	}
-	public void setBirthDay(String birthDay) {
+	public void setBirthDay(Date birthDay) {
 		this.birthDay = birthDay;
 	}
 	public Long getId() {

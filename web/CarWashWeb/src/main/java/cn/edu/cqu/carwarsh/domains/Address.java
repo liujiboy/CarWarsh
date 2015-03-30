@@ -28,22 +28,17 @@ public class Address {
 	 * 详细地址
 	 */
 	@Column(nullable=false,length=255)
-	private String detailAddress;
+	private String name;
 	/**
 	 * 经度
 	 */
 	@Column(nullable=false,length=30)
-	private String latitude;
+	private Double latitude;
 	/**
 	 * 纬度
 	 */
 	@Column(nullable=false,length=30)
-	private String longitude;
-	/**
-	 * 备注
-	 */
-	@Column(nullable=true,length=255)
-	private String remark;
+	private Double longitude;
 	
 	public Long getId() {
 		return id;
@@ -57,29 +52,23 @@ public class Address {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public String getDetailAddress() {
-		return detailAddress;
+	public String name() {
+		return name;
 	}
-	public void setDetailAddress(String detailAddress) {
-		this.detailAddress = detailAddress;
+	public void setDetailAddress(String name) {
+		this.name = name;
 	}
-	public String getLatitude() {
+	public Double getLatitude() {
 		return latitude;
 	}
-	public void setLatitude(String latitude) {
+	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public String getLongitude() {
+	public Double getLongitude() {
 		return longitude;
 	}
-	public void setLongitude(String longitude) {
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remark) {
-		this.remark = remark;
 	}
 	@Override
 	public int hashCode() {
