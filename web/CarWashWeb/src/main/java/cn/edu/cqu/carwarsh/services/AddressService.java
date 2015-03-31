@@ -40,6 +40,14 @@ public class AddressService extends BaseService {
 	public void edit(Address newAddress) throws Exception{
 		this.update(newAddress);
 	}
-	
+	/**
+	 * 删除Address
+	 * @param Address 用户信息
+	 * @throws Exception
+	 */
+	@Transactional
+	public void delete(Address Address) throws Exception{
+		this.delete(Address);
+	}
 	
 }

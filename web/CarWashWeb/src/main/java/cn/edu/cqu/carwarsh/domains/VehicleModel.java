@@ -42,12 +42,48 @@ public class VehicleModel {
 		 */
 		@Column(nullable=false,length=1)
 		private String pinyin;
+		
+		public Long getId() {
+			return id;
+		}
+		public void setId(Long id) {
+			this.id = id;
+		}
+		
+		public VehicleBrand getBrand() {
+			return brand;
+		}
+		public void setBrand(VehicleBrand brand) {
+			this.brand = brand;
+		}
+		
+		public VehicleCategory getCategory() {
+			return category;
+		}
+		public void setCategory(VehicleCategory category) {
+			this.category = category;
+		}
+		
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		
+		public String getPinyin() {
+			return pinyin;
+		}
+		public void setPinyin(String pinyin) {
+			this.pinyin = pinyin;
+		}
+		
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + ((getBrand() == null) ? 0 : getBrand().hashCode());
+			result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
 			return result;
 		}
 		@Override
@@ -59,17 +95,18 @@ public class VehicleModel {
 			if (getClass() != obj.getClass())
 				return false;
 			VehicleModel other = (VehicleModel) obj;
-			if (brand == null) {
-				if (other.brand != null)
+			if (getBrand() == null) {
+				if (other.getBrand() != null)
 					return false;
-			} else if (!brand.equals(other.brand))
+			} else if (!getBrand().equals(other.getBrand()))
 				return false;
-			if (name == null) {
-				if (other.name != null)
+			if (getName() == null) {
+				if (other.getName() != null)
 					return false;
-			} else if (!name.equals(other.name))
+			} else if (!getName().equals(other.getName()))
 				return false;
 			return true;
 		}
+		
 		
 }

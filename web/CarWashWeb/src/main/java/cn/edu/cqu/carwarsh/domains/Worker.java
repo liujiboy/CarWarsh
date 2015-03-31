@@ -38,7 +38,9 @@ public class Worker {
 	 */
 	@Column(nullable=true)
 	private Boolean status;
-	
+	/**
+	 *关联洗车站点
+	 */
 	@ManyToOne(optional=false)
 	private WarshStation warshStation;
 	
