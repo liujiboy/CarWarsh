@@ -82,14 +82,14 @@ public class VehicleController {
 	 * @return
 	 */
 	@RequestMapping(value="vehicle/delete.do")
-	public JSONResult deleteVehicle(String mobile,String pwd,Vehicle vehicle)
+	public JSONResult deleteVehicle(String mobile,String pwd)
 	{
 		JSONResult result = new JSONResult();
 		try{
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
 				if(customerService.isValid(mobile, pwd)){
-					vehicleService.delete(vehicle);
+					vehicleService.delete(vehicleService.findByMobile(mobile));
 					result.setMsg("删除车辆信息成功");
 					result.setState(true);
 				}else{
@@ -111,7 +111,6 @@ public class VehicleController {
 	 * 修改常用洗车车辆信息
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param newVehicle 要修改的车辆信息记录
 	 * @param licenseNumber 车牌号
 	 * @param color 车辆颜色
 	 * @param vehicleBrandName 车辆品牌名称
@@ -119,13 +118,14 @@ public class VehicleController {
 	 * @return
 	 */
 	@RequestMapping(value="vehicle/edit.do")
-	public JSONResult editVehicle(String mobile,String pwd,Vehicle newVehicle,String licenseNumber,String color,String vehicleBrandName,String vehicleModelName)
+	public JSONResult editVehicle(String mobile,String pwd,String licenseNumber,String color,String vehicleBrandName,String vehicleModelName)
 	{
 		JSONResult result = new JSONResult();
 		try{
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
 				if(customerService.isValid(mobile, pwd)){
+					Vehicle newVehicle=vehicleService.findByMobile(mobile);
 					newVehicle.setCustomer(customer);
 					newVehicle.setColor(color);
 					newVehicle.setLicenseNumber(licenseNumber);

@@ -72,18 +72,17 @@ public class AddressController {
 	 * 删除洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param address 要删除的address记录
 	 * @return
 	 */
 	@RequestMapping(value = "/address/delete.do")
-	public JSONResult deleteAddress(String mobile,String pwd,Address address)
+	public JSONResult deleteAddress(String mobile,String pwd)
 	{
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
 				if(customerService.isValid(mobile, pwd)){
-					addressService.delete(address);
+					addressService.delete(addressService.findByMobile(mobile));
 					result.setMsg("删除地址成功");
 					result.setState(true);
 				}else{
@@ -105,24 +104,24 @@ public class AddressController {
 	 * 修改洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param newAddress 要修改的address记录
-	 * @param address 新的详细地址
-	 * @param longitude 新的经度
-	 * @param latitude 新的纬度
+	 * @param new_Address 新的详细地址
+	 * @param newLongitude 新的经度
+	 * @param newLatitude 新的纬度
 	 * @return
 	 */
 	@RequestMapping(value = "/address/edit.do")
-	public JSONResult editAddress(String mobile,String pwd,Address newAddress,String address,Double longitude,Double latitude)
+	public JSONResult editAddress(String mobile,String pwd,String new_Address,Double newLongitude,Double newLatitude)
 	{
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
 				if(customerService.isValid(mobile, pwd)){
+					Address newAddress=addressService.findByMobile(mobile);
 					newAddress.setCustomer(customer);
-					newAddress.setDetailAddress(address);
-					newAddress.setLongitude(longitude);
-					newAddress.setLatitude(latitude);
+					newAddress.setDetailAddress(new_Address);
+					newAddress.setLongitude(newLongitude);
+					newAddress.setLatitude(newLatitude);
 					addressService.edit(newAddress);
 					result.setMsg("修改地址成功");
 					result.setState(true);
