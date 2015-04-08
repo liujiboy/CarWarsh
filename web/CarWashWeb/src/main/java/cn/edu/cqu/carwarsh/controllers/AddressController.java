@@ -1,5 +1,7 @@
 package cn.edu.cqu.carwarsh.controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,9 @@ public class AddressController {
 	 * @param latitude 纬度
 	 * @return
 	 */
+	
 	@RequestMapping(value = "/address/add.do")
-	public JSONResult addAddress(String mobile,String pwd,String address,Double longitude,Double latitude)
+	public JSONResult addAddress(String mobile,String pwd,String name,Double longitude,Double latitude)
 	{
 		JSONResult result = new JSONResult();
 		try {
@@ -47,7 +50,7 @@ public class AddressController {
 				if(customerService.isValid(mobile, pwd)){
 					Address addr = new Address();
 					addr.setCustomer(customer);
-					addr.setDetailAddress(address);
+					addr.setName(name);
 					addr.setLatitude(latitude);
 					addr.setLongitude(longitude);
 					addressService.add(addr);
@@ -75,14 +78,14 @@ public class AddressController {
 	 * @return
 	 */
 	@RequestMapping(value = "/address/delete.do")
-	public JSONResult deleteAddress(String mobile,String pwd)
+	public JSONResult deleteAddress(String mobile,String pwd,Long addressId)
 	{
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
-				if(customerService.isValid(mobile, pwd)){
-					addressService.delete(addressService.findByMobile(mobile));
+				if(customerService.isValid(mobile, pwd)){					
+					addressService.delete(addressId);
 					result.setMsg("删除地址成功");
 					result.setState(true);
 				}else{
@@ -104,25 +107,27 @@ public class AddressController {
 	 * 修改洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param new_Address 新的详细地址
+	 * @param newAddressName 新的详细地址
 	 * @param newLongitude 新的经度
 	 * @param newLatitude 新的纬度
 	 * @return
 	 */
 	@RequestMapping(value = "/address/edit.do")
-	public JSONResult editAddress(String mobile,String pwd,String new_Address,Double newLongitude,Double newLatitude)
+	public JSONResult editAddress(String mobile,String pwd,int addressId,String newAddressName,Double newLongitude,Double newLatitude)
 	{
 		JSONResult result = new JSONResult();
 		try {
 			Customer customer = customerService.findByMobile(mobile);
 			if(customer!=null){
 				if(customerService.isValid(mobile, pwd)){
-					Address newAddress=addressService.findByMobile(mobile);
+					List<Address> addressList=addressService.findByMobileAll(mobile);
+					Address address=addressList.get(addressId-1);
+					Address newAddress=new Address();
 					newAddress.setCustomer(customer);
-					newAddress.setDetailAddress(new_Address);
+					newAddress.setName(newAddressName);
 					newAddress.setLongitude(newLongitude);
 					newAddress.setLatitude(newLatitude);
-					addressService.edit(newAddress);
+					addressService.edit(address.getId(),newAddress);
 					result.setMsg("修改地址成功");
 					result.setState(true);
 				}else{

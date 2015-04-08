@@ -52,12 +52,6 @@ public class Address {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public String name() {
-		return name;
-	}
-	public void setDetailAddress(String name) {
-		this.name = name;
-	}
 	public Double getLatitude() {
 		return latitude;
 	}

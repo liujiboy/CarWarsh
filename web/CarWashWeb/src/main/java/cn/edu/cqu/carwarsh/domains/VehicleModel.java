@@ -40,9 +40,8 @@ public class VehicleModel {
 		/**
 		 * 车型名拼音首字母
 		 */
-		@Column(nullable=false,length=1)
+		@Column(nullable=false,length=10)
 		private String pinyin;
-		
 		public Long getId() {
 			return id;
 		}
