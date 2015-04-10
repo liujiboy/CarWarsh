@@ -1,6 +1,7 @@
 package cn.edu.cqu.carwarsh.vos;
 
 import java.util.HashMap;
+import java.util.List;
 /**
  * JSON返回数据格式
  * @author liuji
@@ -24,6 +25,18 @@ public class JSONResult extends HashMap<String,Object>{
 	public void setState(Boolean state) {
 		this.put("state", state);
 	}
-	
-	
+	/**
+	 * 返回列表全部信息
+	 * @param list 列表
+	 */
+	public void setList(List<?> list){
+		this.put("list", list);
+	}
+	/**
+	 * 返回列表特定信息
+	 * @param list 列表
+	 */
+//	public<T> void setThe(Class<T> entityClass){
+//		this.put("entityClass", entityClass);
+//	}
 }

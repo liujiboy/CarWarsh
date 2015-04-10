@@ -28,6 +28,11 @@ public class Address {
 	 * 详细地址
 	 */
 	@Column(nullable=false,length=500)
+	private String detailAddress;
+	/**
+	 * 地址名称
+	 */
+	@Column(nullable=false,length=500)
 	private String name;
 	/**
 	 * 经度
@@ -70,6 +75,13 @@ public class Address {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -93,7 +105,5 @@ public class Address {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
