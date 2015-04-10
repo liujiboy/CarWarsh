@@ -60,7 +60,6 @@ public class BaseService {
 	{
 		List<T> list=find(entityClass,queryString,objs);
 			return list;
-
 	}
 	protected Long getCount(String queryString, Object... objs)
 	{
