@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.edu.cqu.carwarsh.domains.Address;
 import cn.edu.cqu.carwarsh.domains.Vehicle;
 import cn.edu.cqu.carwarsh.domains.VehicleModel;
 import cn.edu.cqu.carwarsh.services.VehicleService;
 import cn.edu.cqu.carwarsh.services.CustomerService;
 import cn.edu.cqu.carwarsh.vos.JSONResult;
-
 /**
  * 用户常用洗车车辆服务端接口
  * 
@@ -24,7 +22,6 @@ import cn.edu.cqu.carwarsh.vos.JSONResult;
  */
 @RestController
 public class VehicleController {
-
 	/**
 	 * 用于输出日志
 	 */
@@ -40,17 +37,15 @@ public class VehicleController {
 	 * @param pwd 密码
 	 * @param licenseNumber 车牌号
 	 * @param color 车辆颜色
-	 * @param vehicleBrandName 车辆品牌名称
-	 * @param vehicleModelName 车辆型号名称
-	 //* @param vehicleCategoryName 车辆类别名称
+	 * @param vehicleModelId 车辆型号ID
 	 * @return
 	 */
 	@RequestMapping(value="vehicle/add.do")
-	public JSONResult addVehicle(String mobile,String pwd,String licenseNumber,String color,Long modelId)
+	public JSONResult addVehicle(String mobile,String pwd,String licenseNumber,String color,Long vehicleModelId)
 	{
 		JSONResult result = new JSONResult();
 		try{
-			    VehicleModel vehicleModel=vehicleService.findByModelId(modelId);			
+			    VehicleModel vehicleModel=vehicleService.findByModelId(vehicleModelId);			
 				if(customerService.isValid(mobile, pwd)){
 					Vehicle vehicle = new Vehicle();
 					vehicle.setCustomer(customerService.findByMobile(mobile));
@@ -75,7 +70,7 @@ public class VehicleController {
 	 * 删除常用洗车车辆信息
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param vehicle 要删除的车辆信息
+	 * @param vehicleId 要删除的车辆ID
 	 * @return
 	 */
 	@RequestMapping(value="vehicle/delete.do")
@@ -104,8 +99,7 @@ public class VehicleController {
 	 * @param pwd 密码
 	 * @param licenseNumber 车牌号
 	 * @param color 车辆颜色
-	 * @param vehicleBrandName 车辆品牌名称
-	 * @param vehicleModelName 车辆型号名称
+	 * @param vehicleModelId 车辆型号ID
 	 * @return
 	 */
 	@RequestMapping(value="vehicle/edit.do")

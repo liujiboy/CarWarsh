@@ -33,13 +33,13 @@ public class AddressController {
 	 * 添加洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param address 详细地址
-	 * @param remark 备注
+	 * @param name 地址名称
+	 * @param detailAddress 详细详细地址
 	 * @param longitude 经度
 	 * @param latitude 纬度
+	 * @param remark 备注
 	 * @return
-	 */
-	
+	 */	
 	@RequestMapping(value = "/address/add.do")
 	public JSONResult addAddress(String mobile,String pwd,String name,String detailAddress,Double longitude,Double latitude)
 	{
@@ -70,6 +70,7 @@ public class AddressController {
 	 * 删除洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
+	 * @param addressId 地址ID
 	 * @return
 	 */
 	@RequestMapping(value = "/address/delete.do")
@@ -96,7 +97,9 @@ public class AddressController {
 	 * 修改洗车地址
 	 * @param mobile 手机号
 	 * @param pwd 密码
-	 * @param newAddressName 新的详细地址
+	 * @param addressId 地址ID
+	 * @param newAddressName 新的地址名称
+	 * @param newDetailAddress 新的详细地址
 	 * @param newLongitude 新的经度
 	 * @param newLatitude 新的纬度
 	 * @return
