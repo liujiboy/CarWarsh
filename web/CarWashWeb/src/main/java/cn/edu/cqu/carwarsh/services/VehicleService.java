@@ -20,15 +20,6 @@ import cn.edu.cqu.carwarsh.domains.VehicleModel;
 @Service
 public class VehicleService extends BaseService {
 	/**
-	 * 根据手机号码查找Vehicle
-	 * @param mobile 手机号码
-	 * @return 找到的Vehicle
-	 * @throws Exception
-	 */
-	public Vehicle findByMobile(String mobile) throws Exception {
-		return this.getFirst(Vehicle.class, "from Vehicle where customer.mobile=?",mobile);
-	}
-	/**
 	 * 根据手机号码查找所有的Vehicle
 	 * @param mobile 手机号码
 	 * @return 找到的List<Vehicle>
@@ -44,7 +35,7 @@ public class VehicleService extends BaseService {
 	 * @throws Exception
 	 */
 	public Vehicle findByVehicleId(Long vehicleId) throws Exception {
-		return this.getFirst(Vehicle.class, "from Vehicle where id=?",vehicleId);
+		return this.get(Vehicle.class, vehicleId);
 	}
 	/**
 	 * 根据modelId查找VehicleModel
@@ -53,7 +44,7 @@ public class VehicleService extends BaseService {
 	 * @throws Exception
 	 */
 	public VehicleModel findByModelId(Long modelId) throws Exception {
-		return this.getFirst(VehicleModel.class, "from VehicleModel where id=?",modelId);
+		return this.get(VehicleModel.class, modelId);
 	}
 	/**
 	 * 添加vehicle

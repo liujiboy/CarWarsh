@@ -15,15 +15,6 @@ import cn.edu.cqu.carwarsh.domains.Address;
 @Service
 public class AddressService extends BaseService {
 	/**
-	 * 根据手机号码查找Address
-	 * @param mobile 手机号码
-	 * @return 找到的Address
-	 * @throws Exception
-	 */
-	public Address findByMobile(String mobile) throws Exception {
-		return this.getFirst(Address.class, "from Address where customer.mobile=?",mobile);
-	}
-	/**
 	 * 根据手机号码查找所有的Address
 	 * @param mobile 手机号码
 	 * @return 找到的List<Address>
@@ -38,8 +29,8 @@ public class AddressService extends BaseService {
 	 * @return 找到的Address
 	 * @throws Exception
 	 */
-	public Address findByAddressId(Long id) throws Exception{
-		return this.getFirst(Address.class, "from Address where id=?", id);
+	public Address findByAddressId(Long addressID) throws Exception{
+		return this.get(Address.class, addressID);
 	}
 	/**
 	 * 添加Address
@@ -56,11 +47,12 @@ public class AddressService extends BaseService {
 	 * @throws Exception
 	 */
 	@Transactional
-	public void edit(Long id,Address newAddress) throws Exception{
+	public void edit(Long id,String newAddressName,String newDetailAddress,Double newLongitude,Double newLatitude) throws Exception{
 		Address address=this.get(Address.class, id);
-		address.setLatitude(newAddress.getLatitude());
-		address.setLongitude(newAddress.getLongitude());
-		address.setName(newAddress.getName());
+		address.setLatitude(newLatitude);
+		address.setLongitude(newLongitude);
+		address.setName(newAddressName);
+		address.setDetailAddress(newDetailAddress);
 		this.update(address);
 	}
 	/**
